@@ -51,6 +51,7 @@ const dotenv = __importStar(require("dotenv"));
 const mongoose_1 = __importDefault(require("mongoose"));
 dotenv.config();
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
+const path_1 = __importDefault(require("path"));
 const morgan_1 = __importDefault(require("morgan"));
 const helmet_1 = __importDefault(require("helmet"));
 const express_mongo_sanitize_1 = __importDefault(require("express-mongo-sanitize"));
@@ -74,7 +75,7 @@ const endOfDayRoutes_1 = __importDefault(require("./routes/endOfDayRoutes"));
 if (process.env.NODE_ENV === "development") {
     app.use((0, morgan_1.default)("dev"));
 }
-// app.use(express.static(path.resolve(__dirname, "./public")))
+app.use(express_1.default.static(path_1.default.resolve(__dirname, "./public")));
 // app.use(express.static(path.resolve(__dirname, "../../front-end/dist")))
 app.use(express_1.default.json());
 app.use((0, cookie_parser_1.default)());
@@ -91,9 +92,9 @@ app.use("/api/v1/cash", authMiddleware_1.authenticateUser, cashRoutes_1.default)
 app.use("/api/v1/bank", authMiddleware_1.authenticateUser, bankRoutes_1.default);
 app.use("/api/v1/category", authMiddleware_1.authenticateUser, categoryRoutes_1.default);
 app.use("/api/v1/endofday", authMiddleware_1.authenticateUser, endOfDayRoutes_1.default);
-// app.get("*", (req, res) => {
-//   res.sendFile(path.resolve(__dirname, "./public", "index.html"))
-// })
+app.get("*", (req, res) => {
+    res.sendFile(path_1.default.resolve(__dirname, "./public", "index.html"));
+});
 // app.get("*", (req, res) => {
 //   res.sendFile(path.resolve(__dirname, "../../front-end/dist", "index.html"))
 // })
