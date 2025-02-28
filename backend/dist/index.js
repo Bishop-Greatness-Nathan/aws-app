@@ -107,7 +107,7 @@ const port = Number(process.env.PORT) || 4000;
 const start = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         yield mongoose_1.default.connect(process.env.MONGO_URL);
-        app.listen(port, () => __awaiter(void 0, void 0, void 0, function* () {
+        app.listen(port, "0.0.0.0", () => __awaiter(void 0, void 0, void 0, function* () {
             console.log("connected to DB");
             console.log(`server is listening on port ${port}`);
         }));
