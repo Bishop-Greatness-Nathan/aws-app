@@ -55,7 +55,13 @@ const path_1 = __importDefault(require("path"));
 const morgan_1 = __importDefault(require("morgan"));
 const helmet_1 = __importDefault(require("helmet"));
 const express_mongo_sanitize_1 = __importDefault(require("express-mongo-sanitize"));
+const cors_1 = __importDefault(require("cors"));
 const app = (0, express_1.default)();
+app.use((0, cors_1.default)({
+    origin: ["http://localhost:5173", "http://51.21.150.30"], // Allow your frontend
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    credentials: true, // Allow cookies if needed
+}));
 // middlewares
 const notFound_1 = __importDefault(require("./middleware/notFound"));
 const errorHandler_1 = __importDefault(require("./middleware/errorHandler"));

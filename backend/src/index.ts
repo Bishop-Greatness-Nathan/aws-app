@@ -8,9 +8,17 @@ import path from "path"
 import morgan from "morgan"
 import helmet from "helmet"
 import ExpressMongoSanitize from "express-mongo-sanitize"
+import cors from "cors"
 
 const app = express()
 
+app.use(
+  cors({
+    origin: ["http://localhost:5173", "http://51.21.150.30"], // Allow your frontend
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    credentials: true, // Allow cookies if needed
+  })
+)
 // middlewares
 import notFoundError from "./middleware/notFound"
 import errorHandler from "./middleware/errorHandler"
